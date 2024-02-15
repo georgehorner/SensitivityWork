@@ -6,7 +6,7 @@ import pykdtree
 import sklearn.neighbors as sk
 import scipy.spatial as sp
 import glob
-
+import os
 def clusteredmap(time,regime,property):
 
     newmap = np.ma.masked_all((len(lats),len(lons)))
@@ -28,7 +28,7 @@ def regimes(prop):
         output_array[i] = prod.reshape(cf.shape)
     return output_array
 
-for year in range(2000,2017):
+for year in range(1984,2001):
     for month in range(1,13):
 
         #import monthly isccp files
@@ -71,6 +71,12 @@ for year in range(2000,2017):
         dccraw = np.where(isccp['tc']<220,cot_r[0].filled(np.nan),np.nan)
         dcc_final = np.where(dccraw<0.5,np.nan,dccraw)
 
+
+        path = '/disk1/Users/gah20/DCC/'+str(year)
+        isExist = os.path.exists(path)
+        if not isExist:
+            os.makedirs(path)
+        
         ft = nc.Dataset('/disk1/Users/gah20/DCC/'+str(year)+'/'+str(month).zfill(2)+'.nc','w',format='NETCDF4')
         ft.createDimension('lat', 180)
         ft.createDimension('lon', 360)

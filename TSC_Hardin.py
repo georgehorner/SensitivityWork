@@ -348,15 +348,17 @@ pcraw = isccp['pc']
 isccptime = isccp['time']
 
 ## Import the windfield lat/londata
-fn_wuLAT = '/net/seldon/disk1/Users/gah20/data/ECMWF/era5_u_component_of_wind_'+str(year)+'_hourly.nc'
-ds_wL = nc.Dataset(fn_wuLAT)
-lat = ds_wL['latitude'][:]*(-1)
-lon = ds_wL['longitude'][:]
+#fn_wuLAT = '/net/seldon/disk1/Users/gah20/data/ECMWF/ERA5/u_component_of_wind_'+str(year)+'_hourly.nc'
+#ds_wL = nc.Dataset(fn_wuLAT)
+#lat = ds_wL['latitude'][:]*(-1)
+#lon = ds_wL['longitude'][:]#
 
 fu2 = nc.Dataset('/net/seldon/disk2/Data/ECMWF/ERA5/U-wind-component_200hPa_0.25grid_timed/'+str(year)+'/U-wind-component_200hPa_'+str(j+1).zfill(3)+'.nc')
 fv2 = nc.Dataset('/net/seldon/disk2/Data/ECMWF/ERA5/V-wind-component_200hPa_0.25grid_timed/'+str(year)+'/V-wind-component_200hPa_'+str(j+1).zfill(3)+'.nc')
 u200 = fu2['u']
 v200 = fv2['v']
+lat = fu2['latitude'][:]*(-1)
+lon = fu2['longitude'][:]
 
 fu3 = nc.Dataset('/net/seldon/disk2/Data/ECMWF/ERA5/U-wind-component_300hPa_0.25grid_timed/'+str(year)+'/U-wind-component_300hPa_'+str(j+1).zfill(3)+'.nc')
 fv3 = nc.Dataset('/net/seldon/disk2/Data/ECMWF/ERA5/V-wind-component_300hPa_0.25grid_timed/'+str(year)+'/V-wind-component_300hPa_'+str(j+1).zfill(3)+'.nc')
